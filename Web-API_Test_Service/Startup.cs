@@ -55,7 +55,6 @@ namespace Web_API_Test_Service
                 endpoints.MapControllers();
             });
 
-
         }
     }
 }

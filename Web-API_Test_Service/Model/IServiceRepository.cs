@@ -5,8 +5,13 @@ using System.Threading.Tasks;
 
 namespace Web_API_Test_Service.Model
 {
-    public interface IServiceRepository 
+    public interface IServiceRepository<T> : IDisposable where T : class
     {
-
+        IEnumerable<T> GetModels();
+        T GetModel(int id);
+        void Create(T item);
+        void Update(T item); 
+        void Delete(int id); 
+        void Save(); 
     }
 }
