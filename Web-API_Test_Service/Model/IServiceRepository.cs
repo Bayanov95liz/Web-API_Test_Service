@@ -7,6 +7,10 @@ namespace Web_API_Test_Service.Model
 {
     public interface IServiceRepository<T> : IDisposable where T : class
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         IEnumerable<T> Get();
         T Get(int id);
         void Create(T item);

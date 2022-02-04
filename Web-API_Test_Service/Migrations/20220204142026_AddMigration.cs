@@ -12,9 +12,9 @@ namespace Web_API_Test_Service.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Город = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Улица = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Номердома = table.Column<string>(name: "Номер дома", type: "nvarchar(max)", nullable: false)
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    House = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -22,19 +22,19 @@ namespace Web_API_Test_Service.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Посылка",
+                name: "Parcels",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Улица = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Посылка", x => x.ID);
+                    table.PrimaryKey("PK_Parcels", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Посылка_Address_AddressID",
+                        name: "FK_Parcels_Address_AddressID",
                         column: x => x.AddressID,
                         principalTable: "Address",
                         principalColumn: "ID",
@@ -42,15 +42,15 @@ namespace Web_API_Test_Service.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Посылка_AddressID",
-                table: "Посылка",
+                name: "IX_Parcels_AddressID",
+                table: "Parcels",
                 column: "AddressID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Посылка");
+                name: "Parcels");
 
             migrationBuilder.DropTable(
                 name: "Address");

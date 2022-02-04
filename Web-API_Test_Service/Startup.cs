@@ -27,11 +27,10 @@ namespace Web_API_Test_Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddDbContext<ServiceContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddTransient<IServiceRepository<Parcel>, ParcelRepository>();
-
+            services.AddMemoryCache();
             services.AddOpenApiDocument();
 
         }

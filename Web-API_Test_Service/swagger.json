@@ -129,6 +129,10 @@
       "Parcel": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "title",
+          "address"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -136,15 +140,10 @@
           },
           "title": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "address": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Address"
-              }
-            ]
+            "$ref": "#/components/schemas/Address"
           }
         }
       },
@@ -170,8 +169,8 @@
             "minLength": 1
           },
           "house": {
-            "type": "string",
-            "minLength": 1
+            "type": "integer",
+            "format": "int32"
           }
         }
       }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace Web_API_Test_Service.Controllers
     public class ParcelController : Controller
     {
         private readonly IServiceRepository<Parcel> _repository;
+        private readonly IMemoryCache _memoryCache;
 
-        public ParcelController(IServiceRepository<Parcel> repository)
+        public ParcelController(IServiceRepository<Parcel> repository, IMemoryCache memoryCache)
         {
             _repository = repository;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -62,5 +65,8 @@ namespace Web_API_Test_Service.Controllers
             _repository.Dispose();
             base.Dispose(disposing);
         }
+
+
+
     }
 }

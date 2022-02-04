@@ -13,6 +13,11 @@ namespace Web_API_Test_Service.Model
             _context = context;
         }
 
+        public IEnumerable<Parcel> Get()
+        {
+            return _context.Parcels;
+        }
+
         public void Create(Parcel parcel)
         {
             _context.Parcels.Add(parcel);
@@ -26,6 +31,21 @@ namespace Web_API_Test_Service.Model
                 _context.Parcels.Remove(parcel);
             }
                 
+        }
+
+        public Parcel Get(int id)
+        {
+            return _context.Parcels.Find(id);
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        public void Update(Parcel parcel)
+        {
+            _context.Entry(parcel).State = EntityState.Modified;
         }
 
         private bool disposed = false;
@@ -46,26 +66,6 @@ namespace Web_API_Test_Service.Model
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        public Parcel Get(int id)
-        {
-            return _context.Parcels.Find(id);
-        }
-
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
-        public void Update(Parcel parcel)
-        {
-            _context.Entry(parcel).State = EntityState.Modified;
-        }
-
-        public IEnumerable<Parcel> Get()
-        {
-           return _context.Parcels;
         }
     }
 }

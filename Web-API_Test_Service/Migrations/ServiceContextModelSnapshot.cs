@@ -28,18 +28,14 @@ namespace Web_API_Test_Service.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Город");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("House")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Номер дома");
+                    b.Property<int>("House")
+                        .HasColumnType("int");
 
                     b.Property<string>("Street")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Улица");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -57,14 +53,14 @@ namespace Web_API_Test_Service.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Улица");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AddressID");
 
-                    b.ToTable("Посылка");
+                    b.ToTable("Parcels");
                 });
 
             modelBuilder.Entity("Web_API_Test_Service.Model.Parcel", b =>
