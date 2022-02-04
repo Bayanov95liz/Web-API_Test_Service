@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace Web_API_Test_Service.Model
 {
@@ -48,7 +48,7 @@ namespace Web_API_Test_Service.Model
             GC.SuppressFinalize(this);
         }
 
-        public Parcel GetModel(int id)
+        public Parcel Get(int id)
         {
             return _context.Parcels.Find(id);
         }
@@ -63,7 +63,7 @@ namespace Web_API_Test_Service.Model
             _context.Entry(parcel).State = EntityState.Modified;
         }
 
-        public IEnumerable<Parcel> GetModels()
+        public IEnumerable<Parcel> Get()
         {
            return _context.Parcels;
         }
