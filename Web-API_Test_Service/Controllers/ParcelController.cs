@@ -10,86 +10,55 @@ namespace Web_API_Test_Service.Controllers
 {
     public class ParcelController : Controller
     {
-        private IServiceRepository<Parcel> _repository;
+        private readonly IServiceRepository<Parcel> _repository;
 
         public ParcelController(IServiceRepository<Parcel> repository)
         {
             _repository = repository;
         }
 
-        // GET: ParcelController
-        public ActionResult Index()
+        [HttpGet]
+        public IEnumerable<Parcel> Get()
         {
-            return View();
+            return _repository.Get();
         }
 
-        // GET: ParcelController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public Parcel Get(int id)
         {
-            return View();
+            return _repository.Get(id);
         }
 
-        // GET: ParcelController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ParcelController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Parcel parcel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _repository.Create(parcel);
+                _repository.Save();
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(parcel);
         }
 
-        // GET: ParcelController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: ParcelController/Edit/5
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Update(Parcel parcel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _repository.Update(parcel);
+                _repository.Save();
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(parcel);
         }
 
-        // GET: ParcelController/Delete/5
-        public ActionResult Delete(int id)
+        protected override void Dispose(bool disposing)
         {
-            return View();
-        }
-
-        // POST: ParcelController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _repository.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
