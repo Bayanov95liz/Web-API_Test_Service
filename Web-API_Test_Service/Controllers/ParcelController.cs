@@ -25,7 +25,7 @@ namespace Web_API_Test_Service.Controllers
             return _repository.Get();
         }
 
-        [HttpGet]
+        [HttpGet("{id:int}/id")]
         public Parcel Get(int id)
         {
             return _repository.Get(id);
@@ -45,7 +45,7 @@ namespace Web_API_Test_Service.Controllers
 
 
 
-        [HttpPost]
+        [HttpPut]
         public ActionResult Update(Parcel parcel)
         {
             if (ModelState.IsValid)

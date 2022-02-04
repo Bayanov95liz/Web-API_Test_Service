@@ -10,8 +10,8 @@ using Web_API_Test_Service.Model;
 namespace Web_API_Test_Service.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20220204100747_InitialParcel")]
-    partial class InitialParcel
+    [Migration("20220204132920_AddMigration")]
+    partial class AddMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace Web_API_Test_Service.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Адрес");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Web_API_Test_Service.Model.Parcel", b =>

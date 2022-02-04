@@ -43,7 +43,7 @@ namespace Web_API_Test_Service.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Адрес");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Web_API_Test_Service.Model.Parcel", b =>

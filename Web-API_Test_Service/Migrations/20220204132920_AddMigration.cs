@@ -2,12 +2,12 @@
 
 namespace Web_API_Test_Service.Migrations
 {
-    public partial class InitialParcel : Migration
+    public partial class AddMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Адрес",
+                name: "Address",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -18,7 +18,7 @@ namespace Web_API_Test_Service.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Адрес", x => x.ID);
+                    table.PrimaryKey("PK_Address", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,9 +34,9 @@ namespace Web_API_Test_Service.Migrations
                 {
                     table.PrimaryKey("PK_Посылка", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Посылка_Адрес_AddressID",
+                        name: "FK_Посылка_Address_AddressID",
                         column: x => x.AddressID,
-                        principalTable: "Адрес",
+                        principalTable: "Address",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -53,7 +53,7 @@ namespace Web_API_Test_Service.Migrations
                 name: "Посылка");
 
             migrationBuilder.DropTable(
-                name: "Адрес");
+                name: "Address");
         }
     }
 }
