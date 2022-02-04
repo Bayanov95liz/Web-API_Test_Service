@@ -8,6 +8,8 @@ using Web_API_Test_Service.Model;
 
 namespace Web_API_Test_Service.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ParcelController : Controller
     {
         private readonly IServiceRepository<Parcel> _repository;
