@@ -13,10 +13,10 @@ namespace Web_API_Test_Service.Controllers
     [Route("api/[controller]")]
     public class ParcelController : Controller
     {
-        private readonly IServiceRepository<Parcel> _repository;
+        private readonly IParcelRepository _repository;
         private readonly IMemoryCache _memoryCache;
 
-        public ParcelController(IServiceRepository<Parcel> repository, IMemoryCache memoryCache)
+        public ParcelController(IParcelRepository repository, IMemoryCache memoryCache)
         {
             _repository = repository;
             _memoryCache = memoryCache;
@@ -25,48 +25,67 @@ namespace Web_API_Test_Service.Controllers
         [HttpGet]
         public IEnumerable<Parcel> Get()
         {
-            return _repository.Get();
+            return GetCacheParcels();
         }
 
         [HttpGet("{id:int}/id")]
         public Parcel Get(int id)
         {
-            return _repository.Get(id);
+            Parcel parcel = GetCacheParcels().FirstOrDefault(parcel => parcel.ID == id);
+            return parcel;
         }
 
         [HttpPost]
-        public ActionResult Create(Parcel parcel)
+        public Parcel Create(Parcel parcel)
         {
             if (ModelState.IsValid)
             {
                 _repository.Create(parcel);
                 _repository.Save();
-                return RedirectToAction("Index");
             }
-            return View(parcel);
+            return parcel;
         }
 
-
-
         [HttpPut]
-        public ActionResult Update(Parcel parcel)
+        public Parcel Update(Parcel parcel)
         {
             if (ModelState.IsValid)
             {
                 _repository.Update(parcel);
                 _repository.Save();
-                return RedirectToAction("Index");
             }
-            return View(parcel);
+            return parcel;
         }
 
         protected override void Dispose(bool disposing)
         {
             _repository.Dispose();
+            _memoryCache.Dispose();
             base.Dispose(disposing);
         }
 
+        private IEnumerable<Parcel> GetCacheParcels()
+        {
+            const string cachName = "Parcels";
 
+            if (_memoryCache.TryGetValue(cachName, out IEnumerable<Parcel> parcels))
+            {
+                return parcels;
+            }
+            else
+            {
+                parcels = _repository.Get();
+                var cacheOprions = new MemoryCacheEntryOptions()
+                {
+                    Priority = CacheItemPriority.High,
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(10)
+                };
+
+                _memoryCache.Set(cachName, parcels, cacheOprions);
+
+                return parcels;
+            }
+        }
 
     }
 }

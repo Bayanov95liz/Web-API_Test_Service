@@ -29,7 +29,7 @@ namespace Web_API_Test_Service
         {
             services.AddControllers();
             services.AddDbContext<ServiceContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddTransient<IServiceRepository<Parcel>, ParcelRepository>();
+            services.AddSingleton<IParcelRepository, ParcelRepository>();
             services.AddMemoryCache();
             services.AddOpenApiDocument();
 

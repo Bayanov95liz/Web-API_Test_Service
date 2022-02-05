@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Web_API_Test_Service.Model
 {
-    public class ParcelRepository : IServiceRepository<Parcel>
+    public class ParcelRepository : IParcelRepository
     {
         private ServiceContext _context;
 
@@ -48,18 +48,18 @@ namespace Web_API_Test_Service.Model
             _context.Entry(parcel).State = EntityState.Modified;
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+            _disposed = true;
         }
 
         public void Dispose()

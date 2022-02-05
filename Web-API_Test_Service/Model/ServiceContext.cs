@@ -8,10 +8,7 @@ namespace Web_API_Test_Service.Model
 {
     public class ServiceContext : DbContext
     {
-        public ServiceContext(DbContextOptions<ServiceContext> options) : base(options)
-        { 
-            
-        }
+        public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
 
         public DbSet<Parcel> Parcels { get; set; }
     }
