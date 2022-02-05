@@ -8,7 +8,7 @@ using Web_API_Test_Service.Model;
 
 namespace Web_API_Test_Service.Migrations
 {
-    [DbContext(typeof(ServiceContext))]
+    [DbContext(typeof(ParcelContext))]
     partial class ServiceContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

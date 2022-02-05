@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Web_API_Test_Service.Model;
 
 namespace Web_API_Test_Service.Controllers
@@ -60,7 +58,6 @@ namespace Web_API_Test_Service.Controllers
         protected override void Dispose(bool disposing)
         {
             _repository.Dispose();
-            _memoryCache.Dispose();
             base.Dispose(disposing);
         }
 

@@ -9,7 +9,7 @@ using Web_API_Test_Service.Model;
 
 namespace Web_API_Test_Service.Migrations
 {
-    [DbContext(typeof(ServiceContext))]
+    [DbContext(typeof(ParcelContext))]
     [Migration("20220204142026_AddMigration")]
     partial class AddMigration
     {

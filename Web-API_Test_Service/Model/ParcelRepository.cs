@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Web_API_Test_Service.Model
 {
     public class ParcelRepository : IParcelRepository
     {
-        private ServiceContext _context;
+        private ParcelContext _context;
 
-        public ParcelRepository(ServiceContext context)
+        public ParcelRepository(ParcelContext context)
         {
             _context = context;
         }
 
         public IEnumerable<Parcel> Get()
         {
-            return _context.Parcels;
+            return _context.Parcels.ToList();
         }
 
         public void Create(Parcel parcel)
