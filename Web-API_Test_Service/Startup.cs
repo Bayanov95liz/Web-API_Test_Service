@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System.IO;
 using Web_API_Test_Service.Model;
 
 namespace Web_API_Test_Service
@@ -24,7 +26,14 @@ namespace Web_API_Test_Service
             services.AddDbContext<ParcelContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddMemoryCache();
             services.AddScoped<IParcelRepository, ParcelRepository>();
-            services.AddOpenApiDocument();
+
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web-API_Test_Service", Version = "v1" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Web-API_Test_Service.xml");
+                c.IncludeXmlComments(filePath);
+            });
 
         }
 
@@ -34,10 +43,10 @@ namespace Web_API_Test_Service
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
 
             app.UseHttpsRedirection();
 

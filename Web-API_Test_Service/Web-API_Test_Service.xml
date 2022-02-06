@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Web-API_Test_Service</name>
+    </assembly>
+    <members>
+        <member name="T:Web_API_Test_Service.Controllers.ParcelController">
+            <summary>
+            Контроллер для работы с посылками
+            </summary>
+        </member>
+        <member name="M:Web_API_Test_Service.Controllers.ParcelController.Get">
+            <summary>
+            Получает информацию обо всех посылках
+            </summary>
+            <returns>Возвращает информацию обо всех поссылках.</returns>
+        </member>
+        <member name="M:Web_API_Test_Service.Controllers.ParcelController.Get(System.Int32)">
+            <summary>
+            Получает определенную посылку по id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web_API_Test_Service.Controllers.ParcelController.Create(Web_API_Test_Service.Model.Parcel)">
+            <summary>
+            Создает новую посылку
+            </summary>
+            <param name="parcel">Структура посылки</param>
+            <returns>Структура добавленой посылки</returns>
+        </member>
+        <member name="M:Web_API_Test_Service.Controllers.ParcelController.Update(Web_API_Test_Service.Model.Parcel)">
+            <summary>
+            Обновляет информацию существующей посылки
+            </summary>
+            <param name="parcel">Структура посылки</param>
+            <returns>Структура обновленой посылки</returns>
+        </member>
+        <member name="T:Web_API_Test_Service.Model.Address">
+            <summary>
+            Почтовый адрес
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Address.ID">
+            <summary>
+            Уникальный идентфикатор
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Address.City">
+            <summary>
+            Город
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Address.Street">
+            <summary>
+            Улица
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Address.House">
+            <summary>
+            Номер дома
+            </summary>
+        </member>
+        <member name="T:Web_API_Test_Service.Model.Parcel">
+            <summary>
+            Посылка
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Parcel.ID">
+            <summary>
+            Уникальный идентфикатор
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Parcel.Title">
+            <summary>
+            Информация о посылке
+            </summary>
+        </member>
+        <member name="P:Web_API_Test_Service.Model.Parcel.Address">
+            <summary>
+            Адрес посылки
+            </summary>
+        </member>
+    </members>
+</doc>

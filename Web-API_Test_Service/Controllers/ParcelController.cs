@@ -7,6 +7,9 @@ using Web_API_Test_Service.Model;
 
 namespace Web_API_Test_Service.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с посылками
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class ParcelController : Controller
@@ -20,19 +23,34 @@ namespace Web_API_Test_Service.Controllers
             _memoryCache = memoryCache;
         }
 
+        /// <summary>
+        /// Получает информацию обо всех посылках
+        /// </summary>
+        /// <returns>Возвращает информацию обо всех поссылках.</returns>
         [HttpGet]
         public IEnumerable<Parcel> Get()
         {
             return GetCacheParcels();
         }
 
-        [HttpGet("{id:int}/id")]
+        /// <summary>
+        /// Получает определенную посылку по id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}")]
         public Parcel Get(int id)
         {
             Parcel parcel = GetCacheParcels().FirstOrDefault(parcel => parcel.ID == id);
             return parcel;
         }
 
+        /// <summary>
+        /// Создает новую посылку
+        /// </summary>
+        /// <param name="parcel">Структура посылки</param>
+        /// <returns>Структура добавленой посылки</returns>
         [HttpPost]
         public Parcel Create(Parcel parcel)
         {
@@ -44,6 +62,11 @@ namespace Web_API_Test_Service.Controllers
             return parcel;
         }
 
+        /// <summary>
+        /// Обновляет информацию существующей посылки
+        /// </summary>
+        /// <param name="parcel">Структура посылки</param>
+        /// <returns>Структура обновленой посылки</returns>
         [HttpPut]
         public Parcel Update(Parcel parcel)
         {
