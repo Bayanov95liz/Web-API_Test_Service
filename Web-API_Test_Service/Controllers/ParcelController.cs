@@ -24,9 +24,9 @@ namespace Web_API_Test_Service.Controllers
         }
 
         /// <summary>
-        /// Получает информацию обо всех посылках
+        /// Возвращает информацию обо всех поссылках.
         /// </summary>
-        /// <returns>Возвращает информацию обо всех поссылках.</returns>
+        /// <returns>Список всех посылок</returns>
         [HttpGet]
         public IEnumerable<Parcel> Get()
         {
@@ -34,10 +34,10 @@ namespace Web_API_Test_Service.Controllers
         }
 
         /// <summary>
-        /// Получает определенную посылку по id
+        /// Возвращает определенную посылку по уникальному идентификатору.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Уникальный идентификатор посылки</param>
+        /// <returns>Струкрура посылки</returns>
         [HttpGet]
         [Route("{id}")]
         public Parcel Get(int id)
