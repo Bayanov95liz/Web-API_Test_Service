@@ -17,12 +17,12 @@ namespace Web_API_Test_Service.Model
         /// Возвращает определенную посылку по уникальному идентификатору.
         /// </summary>
         /// <param name="id">Уникальный идентификатор посылки</param>
-        /// <returns>Струкрура посылки</returns>
+        /// <returns>Модель посылки</returns>
         Parcel GetParcel(int id);
         /// <summary>
         /// Создает новую посылку
         /// </summary>
-        /// <param name="item">Структура добавленой посылки</param>
+        /// <param name="item">Модель добавленой посылки</param>
         void Create(Parcel item);
         /// <summary>
         /// Обновляет информацию существующей посылки

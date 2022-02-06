@@ -14,7 +14,7 @@ namespace Web_API_Test_Service.Model
             _context = context;
         }
 
-        public IEnumerable<Parcel> Get()
+        public IEnumerable<Parcel> GetParcels()
         {
             return _context.Parcels.ToList();
         }
@@ -34,7 +34,7 @@ namespace Web_API_Test_Service.Model
                 
         }
 
-        public Parcel Get(int id)
+        public Parcel GetParcel(int id)
         {
             return _context.Parcels.Find(id);
         }

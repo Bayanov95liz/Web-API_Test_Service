@@ -11,29 +11,31 @@
         </member>
         <member name="M:Web_API_Test_Service.Controllers.ParcelController.Get">
             <summary>
-            Получает информацию обо всех посылках
+            Возвращает информацию обо всех поссылках.
             </summary>
-            <returns>Возвращает информацию обо всех поссылках.</returns>
+            <returns>Список всех посылок</returns>
         </member>
         <member name="M:Web_API_Test_Service.Controllers.ParcelController.Get(System.Int32)">
             <summary>
-            Получает определенную посылку по id
+            Возвращает определенную посылку по уникальному идентификатору.
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="id">Уникальный идентификатор посылки</param>
+            <response code="201">Возвращает найденную посылку</response>
+            <response code="400">Если посылка не найдена возвращает null</response>
         </member>
         <member name="M:Web_API_Test_Service.Controllers.ParcelController.Create(Web_API_Test_Service.Model.Parcel)">
             <summary>
             Создает новую посылку
             </summary>
-            <param name="parcel">Структура посылки</param>
-            <returns>Структура добавленой посылки</returns>
+            <param name="parcel">Модель посылки</param>
+            <response code="201">Возвращает вновь созданную модель</response>
+            <response code="400">Если элемент null</response>
         </member>
         <member name="M:Web_API_Test_Service.Controllers.ParcelController.Update(Web_API_Test_Service.Model.Parcel)">
             <summary>
             Обновляет информацию существующей посылки
             </summary>
-            <param name="parcel">Структура посылки</param>
+            <param name="parcel">Модель посылки</param>
             <returns>Структура обновленой посылки</returns>
         </member>
         <member name="T:Web_API_Test_Service.Model.Address">
@@ -59,6 +61,47 @@
         <member name="P:Web_API_Test_Service.Model.Address.House">
             <summary>
             Номер дома
+            </summary>
+        </member>
+        <member name="T:Web_API_Test_Service.Model.IParcelRepository">
+            <summary>
+            Репозиторий для работы с посылками
+            </summary>
+        </member>
+        <member name="M:Web_API_Test_Service.Model.IParcelRepository.GetParcels">
+            <summary>
+            Возвращает информацию обо всех поссылках.
+            </summary>
+            <returns>Список всех посылок</returns>
+        </member>
+        <member name="M:Web_API_Test_Service.Model.IParcelRepository.GetParcel(System.Int32)">
+            <summary>
+            Возвращает определенную посылку по уникальному идентификатору.
+            </summary>
+            <param name="id">Уникальный идентификатор посылки</param>
+            <returns>Модель посылки</returns>
+        </member>
+        <member name="M:Web_API_Test_Service.Model.IParcelRepository.Create(Web_API_Test_Service.Model.Parcel)">
+            <summary>
+            Создает новую посылку
+            </summary>
+            <param name="item">Модель добавленой посылки</param>
+        </member>
+        <member name="M:Web_API_Test_Service.Model.IParcelRepository.Update(Web_API_Test_Service.Model.Parcel)">
+            <summary>
+            Обновляет информацию существующей посылки
+            </summary>
+            <param name="item">Модель посылки</param>
+        </member>
+        <member name="M:Web_API_Test_Service.Model.IParcelRepository.Delete(System.Int32)">
+            <summary>
+            Обновляет информацию по уникальному идентификатору
+            </summary>
+            <param name="id">Уникальный идентификатор посылки</param>
+        </member>
+        <member name="M:Web_API_Test_Service.Model.IParcelRepository.Save">
+            <summary>
+            Сохраняет изменения в базу данных
             </summary>
         </member>
         <member name="T:Web_API_Test_Service.Model.Parcel">

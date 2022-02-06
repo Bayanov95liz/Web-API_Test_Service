@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,20 @@ namespace Web_API_Test_Service.Controllers
     [Route("api/[controller]")]
     public class ParcelController : Controller
     {
+        #region private readonly
         private readonly IParcelRepository _repository;
         private readonly IMemoryCache _memoryCache;
+        #endregion
 
+        #region Constructor
         public ParcelController(IParcelRepository repository, IMemoryCache memoryCache)
         {
             _repository = repository;
             _memoryCache = memoryCache;
         }
+        #endregion
 
+        #region public methods
         /// <summary>
         /// Возвращает информацию обо всех поссылках.
         /// </summary>
@@ -37,7 +43,10 @@ namespace Web_API_Test_Service.Controllers
         /// Возвращает определенную посылку по уникальному идентификатору.
         /// </summary>
         /// <param name="id">Уникальный идентификатор посылки</param>
-        /// <returns>Струкрура посылки</returns>
+        /// <response code="201">Возвращает найденную посылку</response>
+        /// <response code="400">Если посылка не найдена возвращает null</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet]
         [Route("{id}")]
         public Parcel Get(int id)
@@ -49,8 +58,11 @@ namespace Web_API_Test_Service.Controllers
         /// <summary>
         /// Создает новую посылку
         /// </summary>
-        /// <param name="parcel">Структура посылки</param>
-        /// <returns>Структура добавленой посылки</returns>
+        /// <param name="parcel">Модель посылки</param>
+        /// <response code="201">Возвращает вновь созданную модель посылки</response>
+        /// <response code="400">Если элемент null</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public Parcel Create(Parcel parcel)
         {
@@ -65,9 +77,13 @@ namespace Web_API_Test_Service.Controllers
         /// <summary>
         /// Обновляет информацию существующей посылки
         /// </summary>
-        /// <param name="parcel">Структура посылки</param>
+        /// <param name="parcel">Модель посылки</param>
         /// <returns>Структура обновленой посылки</returns>
+        /// <response code="201">Возвращает вновь обновленую модель посылки</response>
+        /// <response code="400">Если элемент null</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public Parcel Update(Parcel parcel)
         {
             if (ModelState.IsValid)
@@ -78,12 +94,21 @@ namespace Web_API_Test_Service.Controllers
             return parcel;
         }
 
+        #endregion
+
+        #region override
         protected override void Dispose(bool disposing)
         {
             _repository.Dispose();
             base.Dispose(disposing);
         }
+        #endregion
 
+        #region private methods
+        /// <summary>
+        /// Кеширует информацию обо всех посылках.
+        /// </summary>
+        /// <returns>Список всех посылок</returns>
         private IEnumerable<Parcel> GetCacheParcels()
         {
             const string cachName = "Parcels";
@@ -94,7 +119,7 @@ namespace Web_API_Test_Service.Controllers
             }
             else
             {
-                parcels = _repository.Get();
+                parcels = _repository.GetParcels();
                 var cacheOprions = new MemoryCacheEntryOptions()
                 {
                     Priority = CacheItemPriority.High,
@@ -106,6 +131,7 @@ namespace Web_API_Test_Service.Controllers
                 return parcels;
             }
         }
+        #endregion
 
     }
 }
