@@ -1,5 +1,5 @@
 # Web-API_Test_Service
-### Веб сервис взаимодействие с базой данных + swagger
+### Веб сервис взаимодействие с SQL Server Express + swagger
 
 ## Подгатовка к запуску.
 
